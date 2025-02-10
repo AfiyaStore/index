@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>প্রশ্ন ব্যাংক</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; text-align: center; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f5f5f5; position: sticky; top: 0; z-index: 1000; }
+        .header h2 { margin: 0; }
+        .menu { display: flex; gap: 15px; position: sticky; top: 50px; background: white; padding: 10px; z-index: 999; }
+        .menu div { cursor: pointer; padding: 10px; background: #ddd; border-radius: 5px; }
+        .menu div.active { background: #88c; color: white; }
+        .search-box input { padding: 10px; width: 300px; }
+        .big-container { display: flex; flex-direction: column; align-items: center; }
+        .big-box { width: 80%; margin: 20px auto; padding: 20px; border: 2px solid #ddd; border-radius: 10px; background: #f9f9f9; }
+        .grid-container { display: grid; gap: 10px; justify-content: center; }
+        .subjects { grid-template-columns: repeat(4, 1fr); }
+        .institution { grid-template-columns: repeat(4, 1fr); }
+        .model-test { grid-template-columns: repeat(4, 1fr); }
+        .box { padding: 15px; background: #f5f5f5; cursor: pointer; border-radius: 5px; text-align: center; transition: background 0.3s; }
+        .box img { width: 100px; height: 100px; display: block; margin: 0 auto 10px; }
+        .box:hover { background: #88c; color: white; }
+        .underline { width: 100px; height: 3px; background: black; margin: 5px auto; }
+        .go-back { display: none; padding: 8px 12px; background: #ff5555; color: white; border-radius: 5px; cursor: pointer; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>প্রশ্ন ব্যাংক</h2>
+        <div class="search-box">
+            <input type="text" id="search" placeholder="প্রশ্ন ব্যাংক খুঁজো" onkeyup="searchBox()">
+        </div>
+    </div>
+    <div class="underline"></div>
+    <div class="menu">
+        <div onclick="filterCategory('subject-box', this)">বিষয়ভিত্তিক</div>
+        <div onclick="filterCategory('institution-box', this)">প্রতিষ্ঠান ভিত্তিক</div>
+        <div onclick="filterCategory('model-test-box', this)">মডেল টেস্ট</div>
+    </div>
+    <div class="big-container">
+        <div class="big-box" id="subject-box">
+            <h3>বিষয়ভিত্তিক</h3>
+            <div class="grid-container subjects">
+                <script>for(let i=1; i<=16; i++) document.write(`<div class='box' onclick="location.href='subject${i}.html'" onmouseover="this.style.background='#88c'" onmouseout="this.style.background=''">
+                    <img src='image.png' alt='Sub ${i}'>Box ${i}</div>`);</script>
+            </div>
+        </div>
+        <div class="big-box" id="institution-box">
+            <h3>প্রতিষ্ঠান ভিত্তিক</h3>
+            <div class="grid-container institution">
+                <script>for(let i=1; i<=24; i++) document.write(`<div class='box' onclick="location.href='institution${i}.html'" onmouseover="this.style.background='#88c'" onmouseout="this.style.background=''">
+                    <img src='image.png' alt='Inst ${i}'>Box ${i}</div>`);</script>
+            </div>
+        </div>
+        <div class="big-box" id="model-test-box">
+            <h3>মডেল টেস্ট</h3>
+            <div class="grid-container model-test">
+                <script>for(let i=1; i<=16; i++) document.write(`<div class='box' onclick="location.href='test${i}.html'" onmouseover="this.style.background='#88c'" onmouseout="this.style.background=''">
+                    <img src='image.png' alt='Test ${i}'>Box ${i}</div>`);</script>
+            </div>
+        </div>
+    </div>
+    <button class="go-back" onclick="resetView()">🔙 Go Back</button>
+    <script>
+        function searchBox() {
+            let query = document.getElementById('search').value.toLowerCase();
+            document.querySelectorAll('.box').forEach(box => {
+                box.style.display = box.innerText.toLowerCase().includes(query) ? 'block' : 'none';
+            });
+        }
+        function filterCategory(id, element) {
+            document.querySelectorAll('.big-box').forEach(box => box.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+            document.querySelectorAll('.menu div').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            document.querySelector('.go-back').style.display = 'block';
+        }
+        function resetView() {
+            document.querySelectorAll('.big-box').forEach(box => box.style.display = 'block');
+            document.querySelector('.go-back').style.display = 'none';
+            document.querySelectorAll('.menu div').forEach(btn => btn.classList.remove('active'));
+        }
+    </script>
+</body>
+</html>

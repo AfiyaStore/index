@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Exam</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; text-align: center; background: #f0f2f5; }
+        .header { display: flex; align-items: center; justify-content: space-between; padding: 15px; background: #004085; color: white; position: sticky; top: 0; z-index: 1000; }
+        .header .back-btn { cursor: pointer; font-size: 20px; }
+        .header .title { flex: 1; text-align: center; font-size: 22px; font-weight: bold; }
+        .header .icons-box { display: flex; align-items: center; gap: 15px; }
+        .header .icons-box div { padding: 8px 12px; border-radius: 5px; cursor: pointer; background: white; color: #004085; transition: 0.3s; }
+        .header .icons-box div:hover { background: #ffc107; color: black; }
+        .search-bar { position: sticky; top: 60px; background: white; padding: 10px; border-bottom: 2px solid #ccc; width: 100%; z-index: 999; }
+        .box-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 20px; }
+        .box { padding: 20px; background: white; cursor: pointer; border-radius: 8px; text-align: center; transition: transform 0.3s, background 0.3s; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .box:hover { background: #ffc107; transform: scale(1.05); }
+        .box .title { font-weight: bold; margin-bottom: 10px; color: #004085; }
+        .box .details { font-size: 14px; color: #555; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="back-btn" onclick="history.back()">🔙</div>
+        <div class="title">প্রশ্ন অনুশীলন</div>
+        <div class="icons-box">
+            <div onclick="window.location.href='question_page.html'">❓ প্রশ্ন</div>
+            <div onclick="window.location.href='practice_setup.html'">🛠️ প্র্যাকটিস</div>
+        </div>
+    </div>
+    
+    <div class="search-bar">
+        <input type="text" placeholder="🔍 প্রশ্ন খুঁজুন" style="width: 80%; padding: 10px; font-size: 16px;">
+    </div>
+    
+    <div class="box-container">
+        <script>
+            const exams = [];
+            const boards = ["ঢাকা", "চট্টগ্রাম", "রাজশাহী", "কুমিল্লা", "সিলেট", "বরিশাল", "যশোর", "দিনাজপুর", "ময়মনসিংহ", "ফেনী", "রংপুর", "বগুড়া", "কুষ্টিয়া", "নোয়াখালী", "সুনামগঞ্জ", "গোপালগঞ্জ", "পাবনা", "টাঙ্গাইল", "ঝিনাইদহ", "কক্সবাজার"];
+            const exam_links = [
+                "index1.html", "chattogram_exam.html", "rajshahi_exam.html", "comilla_exam.html",
+                "sylhet_exam.html", "barishal_exam.html", "jessore_exam.html", "dinajpur_exam.html",
+                "mymensingh_exam.html", "feni_exam.html", "rangpur_exam.html", "bogura_exam.html",
+                "kushtia_exam.html", "noakhali_exam.html", "sunamganj_exam.html", "gopalganj_exam.html",
+                "pabna_exam.html", "tangail_exam.html", "jhenidah_exam.html", "coxsbazar_exam.html"
+            ];
+        
+            boards.forEach((board, index) => {
+                exams.push({ board, year: "২০২৫", time: "৩০ মিনিট", questions: "৩০", link: exam_links[index] });
+            });
+        
+            exams.forEach(exam => {
+                document.write(`
+                    <div class='box' onclick="window.location.href='${exam.link}'">
+                        <div class='title'>📘 ${exam.board} ${exam.year}</div>
+                        <div class='details'>⏳ ${exam.time} | ❓ ${exam.questions} প্রশ্ন</div>
+                    </div>
+                `);
+            });
+        </script>        
+    </div>
+</body>
+</html>

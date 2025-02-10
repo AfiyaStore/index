@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject Page1</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        .header { display: flex; align-items: center; gap: 10px; }
+        .back-btn { cursor: pointer; font-size: 20px; background: none; border: none; color: #ff5555; }
+        .subject-title { font-size: 24px; font-weight: bold; margin: 20px 0; }
+        .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; padding: 20px; }
+        .box { padding: 15px; border: 1px solid #ddd; cursor: pointer; border-radius: 5px; text-align: center; transition: 0.3s;}
+        .box img { width: 100px; height: 100px; display: block; margin: 0 auto 10px;}
+        .box:hover, .box.active { background: #88c; color: white; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="back-btn" onclick="history.back()">&#8592; Back</button>
+        <h2>একাডেমিক বই</h2>
+    </div>
+    <div class="subject-title">Physics 1st Part</div>
+    <div class="container">
+        <script>
+            let topics = [
+                { name: "Chapter 1 ", img: "images/image1.png", link: "mcq.html" },
+                { name: "Chapter 2", img: "images/image2.png", link: "chapter2.html" },
+                { name: "Chapter 3", img: "images/image3.png", link: "chapter3.html" },
+                { name: "Chapter 4", img: "images/image4.png", link: "chapter4.html" },
+                { name: "Chapter 5", img: "images/image5.png", link: "chapter5.html" },
+                { name: "Chapter 6", img: "images/image6.png", link: "chapter6.html" }
+            ];
+            topics.forEach((topic) => {
+                document.write(`<div class='box' onclick="navigateTo('${topic.link}', this)">
+                    <img src='${topic.img}' alt='${topic.name}'>
+                    <p>${topic.name}</p>
+                </div>`);
+            });
+        </script>
+    </div>
+    <script>
+        function navigateTo(link, element) {
+            document.querySelectorAll('.box').forEach(box => box.classList.remove('active'));
+            element.classList.add('active');
+            setTimeout(() => { window.location.href = link; }, 300);
+        }
+    </script>
+</body>
+</html>
